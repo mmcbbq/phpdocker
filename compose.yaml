@@ -38,3 +38,6 @@ services:
     # Port zuweisung host-port:Container-port
     ports:
       - "8080:8080"
+
+
+# zum starten aller container docker-compose up --build -d
