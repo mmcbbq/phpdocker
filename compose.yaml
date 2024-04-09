@@ -1,25 +1,40 @@
+# version ist immer die erste Zeile in der compose.yaml
 version: "3.3"
+# Damit die Daten in der Db erhalten bleiben wird ein Volume erstellen und der Name Angegeben
 volumes:
   data:
+# Einrichten der Container
 services:
+  # Name des Containers des Webservers
   myphp:
+    # Container aus einem Dockerfile erstellen ./ Dockerfile ist im working_dir
     build: ./
+    # Port zuweisung host-port:Container-port
     ports:
       - "80:80"
+  # Name des Containers der Db wird in den mysqli string gebraucht
   mariadb:
+    # image aus der, der DB Container rstellt werden soll
     image: mariadb:latest
     restart: always
+    # Einstellen von Usernamen und pws !!!! nicht sicher!!!!
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: hallo_db
       MARIADB_USER: manuel
       MARIADB_PASSWORD: 123456
+
+      # Port zuweisung host-port:Container-port
     ports:
       - "3306:3306"
+    # Angabe das die Daten in einem Volume gespeichert und gelesen werden sollen
+    # date -> Volume /var/lib/mysql -> Ordner der gespeichert werden soll
     volumes:
       - data:/var/lib/mysql
+  # Einrichtung von adminer 'phpmyadmin'
   adminer:
     image: adminer
     restart: always
+    # Port zuweisung host-port:Container-port
     ports:
       - "8080:8080"
