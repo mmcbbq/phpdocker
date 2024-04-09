@@ -7,17 +7,17 @@ volumes:
 services:
   # Name des Containers des Webservers
   myphp:
-    # Container aus einem Dockerfile erstellen ./ Dockerfile ist im working_dir
+    # Container aus einem Dockerfile erstellen (./) Dockerfile ist im working_dir
     build: ./
     # Port zuweisung host-port:Container-port
     ports:
       - "80:80"
   # Name des Containers der Db wird in den mysqli string gebraucht
   mariadb:
-    # image aus der, der DB Container rstellt werden soll
+    # image aus der, der DB Container erstellt werden soll
     image: mariadb:latest
     restart: always
-    # Einstellen von Usernamen und pws !!!! nicht sicher!!!!
+    # Einstellen von Usernamen und pws !!!! nicht sicher!!!! https://docs.docker.com/compose/use-secrets/
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: hallo_db
